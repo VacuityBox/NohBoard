@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace ThoNohT.NohBoard.Hooking
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -36,6 +37,11 @@ namespace ThoNohT.NohBoard.Hooking
             /// The time in milliseconds when the press was detected.
             /// </summary>
             public long startTime { get; set; }
+
+            /// <summary>
+            /// The timestamp when press was detected.
+            /// </summary>
+            public long timestamp { get; set; }
 
             /// <summary>
             /// A value indicating whether the press should be removed, once the hold time is elapsed.
@@ -79,6 +85,22 @@ namespace ThoNohT.NohBoard.Hooking
         public static IReadOnlyList<T> PressedKeys
         {
             get { lock (pressedKeys) return pressedKeys.Keys.ToList().AsReadOnly(); }
+        }
+
+        /// <summary>
+        /// Returns a list with key, timestamp pair that are currently pressed.
+        /// </summary>
+        public static IReadOnlyList<Tuple<T, long>> PressedKeysWithTimestamp
+        {
+            get
+            {
+                lock (pressedKeys)
+                {
+                    return pressedKeys.Select(
+                        x => new Tuple<T, long>(x.Key, x.Value.timestamp)
+                        ).ToList();
+                }
+            }
         }
 
         /// <summary>

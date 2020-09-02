@@ -247,6 +247,7 @@ namespace ThoNohT.NohBoard.Hooking
                         new KeyPress
                         {
                             startTime = keyHoldStopwatch.ElapsedMilliseconds,
+                            timestamp = Stopwatch.GetTimestamp(),
                             removed = false
                         });
 

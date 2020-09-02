@@ -51,6 +51,7 @@ namespace ThoNohT.NohBoard.Forms
             this.MainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuKeyboards = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuToggleSKeysMode = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuToggleEditMode = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUpdateTextPosition = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +100,7 @@ namespace ThoNohT.NohBoard.Forms
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSettings,
             this.mnuKeyboards,
+            this.mnuToggleSKeysMode,
             this.MainMenuSep2,
             this.mnuToggleEditMode,
             this.mnuUpdateTextPosition,
@@ -136,6 +138,14 @@ namespace ThoNohT.NohBoard.Forms
             this.mnuKeyboards.Size = new System.Drawing.Size(202, 22);
             this.mnuKeyboards.Text = "&Load Keyboard";
             this.mnuKeyboards.Click += new System.EventHandler(this.mnuLoadKeyboard_Click);
+            // 
+            // mnuToggleSKeysMode
+            // 
+            this.mnuToggleSKeysMode.CheckOnClick = true;
+            this.mnuToggleSKeysMode.Name = "mnuToggleSKeysMode";
+            this.mnuToggleSKeysMode.Size = new System.Drawing.Size(202, 22);
+            this.mnuToggleSKeysMode.Text = "SKeys Mode";
+            this.mnuToggleSKeysMode.Click += new System.EventHandler(this.mnuToggleSKeysMode_Click);
             // 
             // MainMenuSep2
             // 
@@ -406,6 +416,7 @@ namespace ThoNohT.NohBoard.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.ResizeEnd += new System.EventHandler(this.MainForm_SKeys_ResizeEnd);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
@@ -421,6 +432,7 @@ namespace ThoNohT.NohBoard.Forms
         private System.Windows.Forms.Timer UpdateTimer;
         private System.Windows.Forms.ContextMenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuKeyboards;
+        private System.Windows.Forms.ToolStripMenuItem mnuToggleSKeysMode;
         private System.Windows.Forms.ToolStripMenuItem mnuSettings;
         private System.Windows.Forms.ToolStripSeparator MainMenuSep1;
         private System.Windows.Forms.ToolStripMenuItem mnuToggleEditMode;

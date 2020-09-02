@@ -347,7 +347,7 @@ namespace ThoNohT.NohBoard.Keyboard.ElementDefinitions
 
         #endregion Transformations
 
-        #region Private methods
+        #region Public methods
 
         /// <summary>
         /// Determines whether to use the shift text or the regular text for this key depening on the shift, caps lock
@@ -356,7 +356,7 @@ namespace ThoNohT.NohBoard.Keyboard.ElementDefinitions
         /// <param name="shift">Whether shift is pressed.</param>
         /// <param name="capsLock">Whether caps lock is active.</param>
         /// <returns>The text to display for this key.</returns>
-        private string GetText(bool shift, bool capsLock)
+        public string GetText(bool shift, bool capsLock)
         {
             if (GlobalSettings.Settings.Capitalization != CapitalizationMethod.FollowKeys)
             {
@@ -374,6 +374,10 @@ namespace ThoNohT.NohBoard.Keyboard.ElementDefinitions
             var capitalize = this.ChangeOnCaps && (capsLock ^ shift) || !this.ChangeOnCaps && shift;
             return capitalize ? this.ShiftText : this.Text;
         }
+
+        #endregion Public methods
+
+        #region Private methods
 
         /// <summary>
         /// Updates the key definition to occupy a region of itself plus the specified other keys.

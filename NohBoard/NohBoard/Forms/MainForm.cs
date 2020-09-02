@@ -160,7 +160,11 @@ namespace ThoNohT.NohBoard.Forms
             this.highlightedDefinition = null;
             this.selectedDefinition = null;
 
-            this.ClientSize = new Size(GlobalSettings.CurrentDefinition.Width, GlobalSettings.CurrentDefinition.Height);
+            // mnuToggleSKeysMode_Click will handle that.
+            //this.ClientSize = new Size(GlobalSettings.CurrentDefinition.Width, GlobalSettings.CurrentDefinition.Height);
+
+            this.mnuToggleSKeysMode.Checked = GlobalSettings.Settings.SKeysMode;
+            this.mnuToggleSKeysMode_Click(null, null);
 
             this.ResetBackBrushes();
 
@@ -290,6 +294,7 @@ namespace ThoNohT.NohBoard.Forms
                     GlobalSettings.Settings.LoadedKeyboard = kbDef.Name;
                     GlobalSettings.Settings.LoadedStyle = kbStyle?.Name;
                     GlobalSettings.Settings.LoadedGlobalStyle = globalStyle;
+                    GlobalSettings.Settings.SKeysMode = false; // Disable SKeysMode when loading keyboard.
 
                     try
                     {
@@ -538,7 +543,8 @@ namespace ThoNohT.NohBoard.Forms
             this.mnuSaveToGlobalStyleName.Enabled = GlobalSettings.CurrentStyle.IsGlobal;
             this.mnuSaveToGlobalStyleName.Visible = GlobalSettings.Settings.LoadedGlobalStyle;
 
-            this.mnuToggleEditMode.Enabled = GlobalSettings.CurrentDefinition != null;
+            this.mnuToggleEditMode.Enabled = GlobalSettings.CurrentDefinition != null && GlobalSettings.Settings.SKeysMode != true;
+            this.mnuToggleSKeysMode.Enabled = GlobalSettings.CurrentDefinition != null && this.mnuToggleEditMode.Checked != true;
 
             if (this.latestVersion != null && !this.mnuUpdate.Visible)
             {
@@ -588,6 +594,19 @@ namespace ThoNohT.NohBoard.Forms
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (!GlobalSettings.Settings.SKeysMode)
+                this.PaintForm(e);
+            else
+                SKeys.Paint(e);
+
+            base.OnPaint(e);
+        }
+
+        /// <summary>
+        /// MainForm paint function.
+        /// </summary>
+        private void PaintForm(PaintEventArgs e)
+        {
             e.Graphics.Clear(GlobalSettings.CurrentStyle.BackgroundColor);
 
             if (GlobalSettings.CurrentDefinition == null || !this.backBrushes.Any())
@@ -628,8 +647,6 @@ namespace ThoNohT.NohBoard.Forms
             {
                 this.currentlyManipulating.Value.definition.RenderEditing(e.Graphics);
             }
-
-            base.OnPaint(e);
         }
 
         /// <summary>

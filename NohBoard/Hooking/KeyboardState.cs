@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace ThoNohT.NohBoard.Hooking
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using static Interop.Defines;
     using static Interop.FunctionImports;
@@ -141,6 +142,7 @@ namespace ThoNohT.NohBoard.Hooking
                         new KeyPress
                         {
                             startTime = keyHoldStopwatch.ElapsedMilliseconds,
+                            timestamp = Stopwatch.GetTimestamp(),
                             removed = false
                         });
 

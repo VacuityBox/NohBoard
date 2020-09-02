@@ -265,5 +265,18 @@ namespace ThoNohT.NohBoard.Extra
         }
 
         #endregion Methods
+
+        #region SKeys
+
+        [DataMember]
+        public bool SKeysMode { get; set; } = false;
+
+        [DataMember]
+        public int SKeysWindowWidth { get; set; } = 480;
+
+        [DataMember]
+        public int SKeysWindowHeight { get; set; } = 100;
+
+        #endregion SKeys
     }
 }

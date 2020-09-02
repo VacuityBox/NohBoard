@@ -391,7 +391,7 @@ namespace ThoNohT.NohBoard.Keyboard.ElementDefinitions
         /// <param name="subStyle">The substyle to use for rendering the key.</param>
         /// <param name="pressed">Whether the is pressed.</param>
         /// <returns>A brush to use when rendering the background for the key.</returns>
-        protected Brush GetBackgroundBrush(KeySubStyle subStyle, bool pressed)
+        public Brush GetBackgroundBrush(KeySubStyle subStyle, bool pressed)
         {
             if (this.backgroundBrushes == null) this.backgroundBrushes = new Dictionary<bool, Brush>();
             if (this.StyleVersion != GlobalSettings.StyleDependencyCounter)
