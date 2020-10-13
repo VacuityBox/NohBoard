@@ -81,6 +81,11 @@ namespace ThoNohT.NohBoard.Hooking
         public static bool CapsActive => CheckStateKey(VK_CAPITAL);
 
         /// <summary>
+        /// Indicate if state keys should be shown as pressed when state is active.
+        /// </summary>
+        public static bool HoldStateKeys { get; set; } = true;
+
+        /// <summary>
         /// Checks the state of all keys and removes the ones that are no longer pressed from the list of pressed keys.
         /// </summary>
         /// <param name="hold">The minimum time to hold keys.</param>
@@ -127,7 +132,8 @@ namespace ThoNohT.NohBoard.Hooking
 
                 var time = keyHoldStopwatch.ElapsedMilliseconds;
 
-                TryToggleStateKey(keyCode, hold);
+                if (HoldStateKeys)
+                    TryToggleStateKey(keyCode, hold);
 
                 if (pressedKeys.TryGetValue(keyCode, out var pressed))
                 {

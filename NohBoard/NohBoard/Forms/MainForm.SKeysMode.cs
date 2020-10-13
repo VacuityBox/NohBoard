@@ -21,6 +21,8 @@ namespace ThoNohT.NohBoard.Forms
     using System.Drawing;
     using System.Windows.Forms;
     using ThoNohT.NohBoard.Extra;
+    using ThoNohT.NohBoard.Hooking;
+
     public partial class MainForm
     {
         /// <summary>
@@ -34,11 +36,17 @@ namespace ThoNohT.NohBoard.Forms
             {
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.ClientSize = new Size(GlobalSettings.Settings.SKeysWindowWidth, GlobalSettings.Settings.SKeysWindowHeight);
+
+                // Disabled holding of state keys. So they are not displayed when they are active, but only when pressed.
+                KeyboardState.HoldStateKeys = false;
             }
             else
             {
                 this.FormBorderStyle = FormBorderStyle.FixedSingle;
                 this.ClientSize = new Size(GlobalSettings.CurrentDefinition.Width, GlobalSettings.CurrentDefinition.Height);
+
+                // Restore for normal mode.
+                KeyboardState.HoldStateKeys = true;
             }
         }
 
